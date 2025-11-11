@@ -11,26 +11,25 @@ public class AcaoCorretiva {
 
     private LocalDateTime dataHoraInicio;
 
-    private LocalDateTime ndataHoraFim;
+    private LocalDateTime dataHoraFim;
 
     private String responsavel;
 
     private String descricaoAcao;
 
-    public AcaoCorretiva(Long id, Long falhaId, LocalDateTime dataHoraInicio, LocalDateTime ndataHoraFim, String responsavel, String descricaoAcao) {
+    public AcaoCorretiva(Long id, Long falhaId, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String responsavel, String descricaoAcao) {
         this.id = id;
         this.falhaId = falhaId;
         this.dataHoraInicio = dataHoraInicio;
-        this.ndataHoraFim = ndataHoraFim;
+        this.dataHoraFim = dataHoraFim;
         this.responsavel = responsavel;
         this.descricaoAcao = descricaoAcao;
     }
 
-    public AcaoCorretiva(Long falhaId, LocalDateTime dataHoraInicio, LocalDateTime ndataHoraFim, String responsavel, String descricaoAcao) {
-        this.id = id;
+    public AcaoCorretiva(Long falhaId, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String responsavel, String descricaoAcao) {
         this.falhaId = falhaId;
         this.dataHoraInicio = dataHoraInicio;
-        this.ndataHoraFim = ndataHoraFim;
+        this.dataHoraFim = dataHoraFim;
         this.responsavel = responsavel;
         this.descricaoAcao = descricaoAcao;
     }
@@ -51,12 +50,12 @@ public class AcaoCorretiva {
         this.falhaId = falhaId;
     }
 
-    public LocalDateTime getNdataHoraFim() {
-        return ndataHoraFim;
+    public LocalDateTime getdataHoraFim() {
+        return dataHoraFim;
     }
 
-    public void setNdataHoraFim(LocalDateTime ndataHoraFim) {
-        this.ndataHoraFim = ndataHoraFim;
+    public void setdataHoraFim(LocalDateTime dataHoraFim) {
+        this.dataHoraFim = dataHoraFim;
     }
 
     public String getResponsavel() {

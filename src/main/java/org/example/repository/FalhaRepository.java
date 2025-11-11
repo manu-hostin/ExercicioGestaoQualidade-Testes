@@ -53,4 +53,39 @@ public class FalhaRepository {
         }
         return falhas;
     }
+    public static Falha buscarIDExistente (Long id) throws SQLException{
+        String query = "SELECT id, criticidade, equipamentoId, tempoParadaHoras, descricao, status, dataHoraOcorrencia FROM Falha WHERE id = ?";
+
+        try (Connection conn = ConexaoBanco.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Long idCerto = rs.getLong("id");
+                String criticidade = rs.getString("criticidade");
+                Long equip = rs.getLong("equipamentoId");
+                BigDecimal parada = rs.getBigDecimal("tempoParadaHoras");
+                String desc = rs.getString("descricao");
+                String status = rs.getString("status");
+                LocalDateTime data = rs.getTimestamp("dataHoraOcorrencia").toLocalDateTime();
+
+                return new Falha(idCerto, equip, data, desc, criticidade, status, parada);
+            }
+        }
+        return null;
+    }
+    public static void atualizarStatusFalha (String status, Long id) throws SQLException{
+        String query = "UPDATE Falha SET status = ? WHERE id = ?";
+
+        try (Connection conn = ConexaoBanco.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, status);
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+
+        }
+    }
 }

@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EquipamentoRepository {
 
@@ -45,15 +47,38 @@ public class EquipamentoRepository {
         }
         return null;
     }
-    public static void atualizarStatusEquipamento (long id) throws SQLException{
-        String query = "UPDATE Equipamento SET statusOperacional = 'EM_MANUTENCAO' WHERE id = ?";
+    public static void atualizarStatusEquipamento (String status, Long id) throws SQLException{
+        String query = "UPDATE Equipamento SET statusOperacional = ? WHERE id = ?";
 
         try (Connection conn = ConexaoBanco.conectar();
         PreparedStatement stmt = conn.prepareStatement(query)){
 
-            stmt.setLong(1, id);
+            stmt.setString(1, status);
+            stmt.setLong(2, id);
             stmt.executeUpdate();
         }
+    }
+    public static List<Equipamento> buscarEquipamentos () throws SQLException {
+        String query = "SELECT id, nome, numeroDeSerie, areaSetor, statusOperacional FROM Equipamento";
+
+        List<Equipamento> lista = new ArrayList<>();
+        try (Connection conn = ConexaoBanco.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Long id = rs.getLong("id");
+                String nome = rs.getString("nome");
+                String numero = rs.getString("numeroDeSerie");
+                String area = rs.getString("areaSetor");
+                String status = rs.getString("statusOperacional");
+
+                var eq = new Equipamento(id, nome, numero, area, status);
+                lista.add(eq);
+            }
+        }
+        return lista;
     }
 
 }

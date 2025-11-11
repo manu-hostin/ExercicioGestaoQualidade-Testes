@@ -21,7 +21,7 @@ public class FalhaService {
 
             if(falha.getCriticidade().equals("CRITICA")){
 
-                repoEq.atualizarStatusEquipamento(eq.getId());
+                repoEq.atualizarStatusEquipamento("EM_MANUTENCAO", eq.getId());
 
             }
             repository.registrarNovaFalha(falha);
