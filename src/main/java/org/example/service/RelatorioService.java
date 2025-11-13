@@ -1,41 +1,27 @@
 package org.example.service;
 
+import org.example.DTO.EquipamentoContagemFalhasDTO;
+import org.example.DTO.FalhaDetalhadaDTO;
+import org.example.DTO.RelatorioParadaDTO;
 import org.example.model.Equipamento;
-import org.example.repository.EquipamentoRepository;
+import org.example.repository.EquipamentoRepositoryImpl;
 import org.example.repository.RelatorioRepository;
+import org.example.repository.RelatorioRepositoryImpl;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class RelatorioService {
+public interface RelatorioService {
 
-    //public static List<RelatorioParadaDTO> gerarRelatorioTempoParada() throws SQLException{
-    //
-    // }
+    List<RelatorioParadaDTO> gerarRelatorioTempoParada() throws SQLException;
 
-    public static List<Equipamento> buscarEquipamentosSemFalhasPorPeriodo(LocalDate dataInicio, LocalDate datafim) throws SQLException {
-        var eqpRepo = new EquipamentoRepository();
-        var relatorioRepo = new RelatorioRepository();
+    List<Equipamento> buscarEquipamentosSemFalhasPorPeriodo(LocalDate dataInicio, LocalDate datafim) throws SQLException;
 
-        List<Equipamento> listaTodosEq = eqpRepo.buscarEquipamentos();
-        List<Equipamento> listaEqFalha = relatorioRepo.buscarEquipamentosSemFalhasPorPeriodo(dataInicio, datafim);
+    Optional<FalhaDetalhadaDTO> buscarDetalhesCompletosFalha(long falhaId) throws SQLException;
 
-        List<Equipamento> listaSemFalha = new ArrayList<>();
-        for (Equipamento item : listaTodosEq){
-            if(!listaEqFalha.contains(item)){
-                listaSemFalha.add(item);
-            }
-        }
+    List<EquipamentoContagemFalhasDTO> gerarRelatorioManutencaoPrevelntiva(int contagemMinimaFalhas) throws SQLException;
 
-        return listaSemFalha;
-    }
-
-//    public static Optional<FalhaDetalhadaDTO> buscarDetalhesCompletosFalha(long falhaId) throws SQLException{
-//
-//    }
-//    public static List<EquipamentoContagemFalhasDTO> gerarRelatorioManutencaoPrevelntiva(int contagemMinimaFalhas) throws SQLException{
-//
-//    }
 }

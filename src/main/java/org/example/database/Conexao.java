@@ -1,10 +1,10 @@
-package org.example.util;
+package org.example.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConexaoBanco {
+public class Conexao {
 
     private static final String URL = "jdbc:mysql://localhost:3306/mod_testes?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
