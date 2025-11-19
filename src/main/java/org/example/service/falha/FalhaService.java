@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.falha;
 
 import org.example.model.Falha;
 

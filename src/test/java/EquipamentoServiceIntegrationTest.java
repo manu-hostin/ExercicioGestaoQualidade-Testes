@@ -94,7 +94,7 @@ public class EquipamentoServiceIntegrationTest {
     @DisplayName("Deve cadastrar um equipamento e salvá-lo no banco")
     void deveCadastrarEquipamento() throws SQLException {
 
-        var equipamento = new Equipamento(
+        var equipamento = new Equipamento (
                 "FRESA",
                 "CÓDIGOTESTE",
                 "SETORTESTE"

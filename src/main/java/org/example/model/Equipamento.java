@@ -1,7 +1,6 @@
 package org.example.model;
 
 public class Equipamento {
-
     private Long id;
 
     private String nome;
@@ -12,7 +11,7 @@ public class Equipamento {
 
     private String statusOperacional;
 
-    public Equipamento (Long id, String nome, String numeroDeSerie, String areaSetor, String statusOperacional) {
+    public Equipamento(Long id, String nome, String numeroDeSerie, String areaSetor, String statusOperacional) {
         this.id = id;
         this.nome = nome;
         this.numeroDeSerie = numeroDeSerie;
@@ -25,6 +24,13 @@ public class Equipamento {
         this.numeroDeSerie = numeroDeSerie;
         this.areaSetor = areaSetor;
         this.statusOperacional = statusOperacional;
+    }
+
+    public Equipamento(String nome, String numeroDeSerie, String areaSetor) {
+        this.nome = nome;
+        this.numeroDeSerie = numeroDeSerie;
+        this.areaSetor = areaSetor;
+        this.statusOperacional = null;
     }
 
     public Long getId() {
@@ -51,19 +57,19 @@ public class Equipamento {
         this.numeroDeSerie = numeroDeSerie;
     }
 
-    public String getStatusOperacional() {
-        return statusOperacional;
-    }
-
-    public void setStatusOperacional(String statusOperacional) {
-        this.statusOperacional = statusOperacional;
-    }
-
     public String getAreaSetor() {
         return areaSetor;
     }
 
     public void setAreaSetor(String areaSetor) {
         this.areaSetor = areaSetor;
+    }
+
+    public String getStatusOperacional() {
+        return statusOperacional;
+    }
+
+    public void setStatusOperacional(String statusOperacional) {
+        this.statusOperacional = statusOperacional;
     }
 }

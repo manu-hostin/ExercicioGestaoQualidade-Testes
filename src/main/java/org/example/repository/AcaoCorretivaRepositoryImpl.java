@@ -8,9 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class AcaoCorretivaRepositoryImpl implements AcaoCorretivaRepository {
+public class AcaoCorretivaRepositoryImpl {
 
-    @Override
+
     public AcaoCorretiva registrarConclusaoDeAcao(AcaoCorretiva acao) throws SQLException {
         String query = "INSERT INTO AcaoCorretiva (falhaId, dataHoraInicio, dataHoraFim, responsavel, descricaoAcao) VALUES (?, ?, ?, ?, ?)";
 

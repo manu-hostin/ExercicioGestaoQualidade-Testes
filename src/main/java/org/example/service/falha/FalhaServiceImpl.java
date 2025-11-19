@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.falha;
 
 import org.example.model.Falha;
 import org.example.repository.EquipamentoRepositoryImpl;
@@ -13,20 +13,35 @@ public class FalhaServiceImpl implements FalhaService {
     public Falha registrarNovaFalha(Falha falha) throws SQLException {
         var repository = new FalhaRepositoryImpl();
         var repoEq = new EquipamentoRepositoryImpl();
-        var eq = repoEq.buscarEquipamentoPorId(falha.getEquipamentoId());
+//        var eq = repoEq.buscarEquipamentoPorId(falha.getEquipamentoId());
+//
+//        if (eq != null) {
+//
+//            falha.setStatus("ABERTA");
+//
+//            if(falha.getCriticidade().equals("CRITICA")){
+//
+//                repoEq.atualizarStatusEquipamento("EM_MANUTENCAO", eq.getId());
+//
+//            }
+//            repository.registrarNovaFalha(falha);
+//        } else {
+//            throw new IllegalArgumentException("Equipamento não encontrado!");
+//        }
+//        return falha;
 
-        if (eq != null) {
+//        OU
+        if (repoEq.equipamentoExiste(falha.getEquipamentoId())){
+           throw new IllegalArgumentException();
+        }
+        falha.setStatus("ABERTA");
+        falha = repository.registrarNovaFalha(falha);
 
-            falha.setStatus("ABERTA");
-
-            if(falha.getCriticidade().equals("CRITICA")){
-
-                repoEq.atualizarStatusEquipamento("EM_MANUTENCAO", eq.getId());
-
-            }
-            repository.registrarNovaFalha(falha);
-        } else {
-            throw new RuntimeException();
+        if(falha.getCriticidade().equals("CRITICA")){
+            repoEq.atualizarStatusEquipamento("EM_MANUTENCAO", falha.getEquipamentoId());
+        }
+        if (falha.getId() == null) {
+            throw new RuntimeException("Erro ao salvar falha!");
         }
         return falha;
     }
@@ -46,6 +61,7 @@ public class FalhaServiceImpl implements FalhaService {
         });
 
         return falhas;
+        // ou return repository.buscarFalhasCriticasAbertas();
     }
 
 }

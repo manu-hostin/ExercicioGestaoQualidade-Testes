@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.acaocorretiva;
 
 import org.example.model.AcaoCorretiva;
 import org.example.repository.AcaoCorretivaRepositoryImpl;
@@ -10,13 +10,13 @@ import java.sql.SQLException;
 public class AcaoCorretivaServiceImpl implements AcaoCorretivaService {
 
     @Override
-    public AcaoCorretiva registrarConclusaoDeAcao(AcaoCorretiva acao) throws SQLException{
+    public AcaoCorretiva registrarConclusaoDeAcao (AcaoCorretiva acao) throws SQLException {
         var repository = new AcaoCorretivaRepositoryImpl();
         var falhaRepo = new FalhaRepositoryImpl();
         var eqRepo = new EquipamentoRepositoryImpl();
 
         var falha = falhaRepo.buscarIDExistente(acao.getFalhaId());
-        if(falha == null){
+        if (falha == null) {
             throw new RuntimeException("ID da Falha não existe.");
         } else {
             repository.registrarConclusaoDeAcao(acao);

@@ -1,11 +1,10 @@
-package org.example.service;
+package org.example.service.relatorioservice;
 
-import org.example.DTO.EquipamentoContagemFalhasDTO;
-import org.example.DTO.FalhaDetalhadaDTO;
-import org.example.DTO.RelatorioParadaDTO;
+import org.example.dto.EquipamentoContagemFalhasDTO;
+import org.example.dto.FalhaDetalhadaDTO;
+import org.example.dto.RelatorioParadaDTO;
 import org.example.model.Equipamento;
 import org.example.repository.EquipamentoRepositoryImpl;
-import org.example.repository.RelatorioRepository;
 import org.example.repository.RelatorioRepositoryImpl;
 
 import java.sql.SQLException;
@@ -24,16 +23,16 @@ public class RelatorioServiceImpl implements RelatorioService {
         lista = repo.gerarRelatorioTempoParada();
 
         lista.forEach(relatorioParadaDTO -> {
-            System.out.println("ID equipamento: " + relatorioParadaDTO.getIdEq());
-            System.out.println("Nome: "+relatorioParadaDTO.getNomeEq());
-            System.out.println("Tempo: "+relatorioParadaDTO.getTempoParada());
+            System.out.println("ID equipamento: " + relatorioParadaDTO.getEquipamentoId());
+            System.out.println("Nome: "+relatorioParadaDTO.getNomeEquipamento());
+            System.out.println("Tempo: "+relatorioParadaDTO.getTotalHorasParadas());
         });
         return lista;
     }
     @Override
     public List<Equipamento> buscarEquipamentosSemFalhasPorPeriodo(LocalDate dataInicio, LocalDate datafim) throws SQLException {
         var eqpRepo = new EquipamentoRepositoryImpl();
-        RelatorioRepository relatorioRepo = new RelatorioRepositoryImpl();
+        RelatorioRepositoryImpl relatorioRepo = new RelatorioRepositoryImpl();
 
         List<Equipamento> listaTodosEq = eqpRepo.buscarEquipamentos();
         List<Equipamento> listaEqFalha = relatorioRepo.buscarEquipamentosSemFalhasPorPeriodo(dataInicio, datafim);
@@ -53,7 +52,7 @@ public class RelatorioServiceImpl implements RelatorioService {
          return null;
     }
     @Override
-    public List<EquipamentoContagemFalhasDTO> gerarRelatorioManutencaoPrevelntiva(int contagemMinimaFalhas) throws SQLException{
+    public List<EquipamentoContagemFalhasDTO> gerarRelatorioManutencaoPreventiva(int contagemMinimaFalhas) throws SQLException{
 
         return null;
     }

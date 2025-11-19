@@ -5,7 +5,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Falha {
+    /*CREATE TABLE IF NOT EXISTS Falha (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    equipamentoId BIGINT NOT NULL,
+    dataHoraOcorrencia DATETIME NOT NULL,
+    descricao TEXT NOT NULL,
+    criticidade VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    tempoParadaHoras DECIMAL(10, 2) DEFAULT 0.00,
 
+    -- Garante que criticidade e status tenham valores pré-definidos
+    CONSTRAINT chk_criticidade_falha CHECK (criticidade IN ('BAIXA', 'MEDIA', 'ALTA', 'CRITICA')),
+    CONSTRAINT chk_status_falha CHECK (status IN ('ABERTA', 'EM_ANDAMENTO', 'RESOLVIDA')),
+*/
     private Long id;
 
     private Long equipamentoId;
@@ -39,6 +51,10 @@ public class Falha {
         this.tempoParadaHoras = tempoParadaHoras;
     }
 
+    public Falha() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -63,14 +79,6 @@ public class Falha {
         this.dataHoraOcorrencia = dataHoraOcorrencia;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -85,6 +93,14 @@ public class Falha {
 
     public void setCriticidade(String criticidade) {
         this.criticidade = criticidade;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public BigDecimal getTempoParadaHoras() {

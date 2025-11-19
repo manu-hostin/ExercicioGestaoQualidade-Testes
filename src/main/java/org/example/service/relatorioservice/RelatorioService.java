@@ -1,16 +1,12 @@
-package org.example.service;
+package org.example.service.relatorioservice;
 
-import org.example.DTO.EquipamentoContagemFalhasDTO;
-import org.example.DTO.FalhaDetalhadaDTO;
-import org.example.DTO.RelatorioParadaDTO;
+import org.example.dto.EquipamentoContagemFalhasDTO;
+import org.example.dto.FalhaDetalhadaDTO;
+import org.example.dto.RelatorioParadaDTO;
 import org.example.model.Equipamento;
-import org.example.repository.EquipamentoRepositoryImpl;
-import org.example.repository.RelatorioRepository;
-import org.example.repository.RelatorioRepositoryImpl;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +18,6 @@ public interface RelatorioService {
 
     Optional<FalhaDetalhadaDTO> buscarDetalhesCompletosFalha(long falhaId) throws SQLException;
 
-    List<EquipamentoContagemFalhasDTO> gerarRelatorioManutencaoPrevelntiva(int contagemMinimaFalhas) throws SQLException;
+    List<EquipamentoContagemFalhasDTO> gerarRelatorioManutencaoPreventiva(int contagemMinimaFalhas) throws SQLException;
 
 }

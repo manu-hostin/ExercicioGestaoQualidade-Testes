@@ -1,7 +1,7 @@
 package org.example.repository;
 
-import org.example.DTO.FalhaDetalhadaDTO;
-import org.example.DTO.RelatorioParadaDTO;
+import org.example.dto.FalhaDetalhadaDTO;
+import org.example.dto.RelatorioParadaDTO;
 import org.example.model.Equipamento;
 import org.example.database.Conexao;
 
@@ -13,9 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RelatorioRepositoryImpl implements RelatorioRepository {
+public class RelatorioRepositoryImpl{
 
-    @Override
     public List<RelatorioParadaDTO> gerarRelatorioTempoParada() throws SQLException {
         String query = """
                 SELECT e.id, e.nome, f.tempoParadaHoras
@@ -32,7 +31,7 @@ public class RelatorioRepositoryImpl implements RelatorioRepository {
             while (rs.next()) {
                 Long id = rs.getLong("id");
                 String nome = rs.getString("nome");
-                BigDecimal tempo = rs.getBigDecimal("tempoParadaHoras");
+                Double tempo = rs.getDouble("tempoParadaHoras");
 
                 var relatorio = new RelatorioParadaDTO(id, nome, tempo);
                 lista.add(relatorio);
@@ -40,7 +39,7 @@ public class RelatorioRepositoryImpl implements RelatorioRepository {
         }
         return lista;
     }
-    @Override
+
     public List<Equipamento> buscarEquipamentosSemFalhasPorPeriodo(LocalDate dataInicio, LocalDate datafim) throws SQLException {
         String query = """
                 SELECT e.id, 
@@ -76,7 +75,7 @@ public class RelatorioRepositoryImpl implements RelatorioRepository {
         }
         return lista;
     }
-    @Override
+
     public Optional<FalhaDetalhadaDTO> buscarDetalhesCompletosFalha(long falhaId) throws SQLException {
         String query = """
                     SELECT 
